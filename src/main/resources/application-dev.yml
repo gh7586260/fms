@@ -1,0 +1,14 @@
+server:
+  port: 8280
+#日志
+logging:
+  levels: info
+  path: /var/log/fms
+  file: ${logging.path}/fms-${server.port}.log
+  pattern:
+    console: "%d - %5p %c{1}:%L %msg%n"
+  level:
+    root: ${logging.levels}
+    com.codingapi: 'OFF'
+    com.ibatis: ${logging.levels}
+    java.sql: ${logging.levels}

@@ -1,0 +1,14 @@
+spring:
+  profiles:
+    active: dev
+  mvc:
+    view:
+      prefix: /jsp/
+      suffix: .jsp
+#日志
+logging:
+  levels: DEBUG
+  pattern:
+    console: "%d - %5p %c{1}:%L %msg%n"
+    level:
+      root:${logging.levels}
