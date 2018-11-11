@@ -15,56 +15,113 @@
     <script src="<%=basePath%>js/jquery-1.10.2.min.js"></script>
     <script src="<%=basePath%>js/bootstrap.min.js"></script>
     <script src="<%=basePath%>js/vue.min.js"></script>
+    <style type="text/css">
+        .table > thead > tr > th {
+            text-align: center;
+            font-weight: bold;
+            font-size: 16px;
+            color: #CC6633;
+        }
+
+        .table > tbody > tr > td {
+            text-align: center;
+            font-weight: bold;
+            font-size: 12px;
+            border: none;
+        }
+    </style>
 </head>
 <body>
-<div id="oneBill">
+<div id="monthStatic">
     <div @click="toUserInfo" style="width: 150px;margin: 10px 10px">
         <img style="width: 50px;height: 50px;float: left;" :src="userPhoto">
         <span style="line-height: 50px;padding-left: 10px">{{userName}}</span>
     </div>
-    <div style="padding: 50px 30px">
-        <div style="margin-top: 30px">
-            <div style="width: 100px;float: left;line-height: 30px">使用事项</div>
-            <input type="text" v-model="detail" style="display: block;width: 200px;height: 30px;"/>
-        </div>
-        <div style="margin-top: 30px">
-            <div style="width: 100px;float: left;line-height: 30px">金额</div>
-            <input type="number" v-model="payPrice" style="display: block;width: 50px;height: 30px;"/>
-        </div>
-        <div style="margin-top: 30px">
-            <div style="width: 100px;float: left;line-height: 30px">日期</div>
-            <input type="date" v-model="payDate" style="height: 25px"/>
-        </div>
-        <div v-if="curBillId==0" @click="addBill" type="button"
-             style="background-color: #5cb85c;width: 150px;height:50px;line-height:50px;  border-radius:15px;
-             color: #000000;text-align: center;margin: 80px auto">
-            添加
-        </div>
-        <div v-if="curBillId!=0" style="margin: 80px 60px">
-            <div @click="editBill" type="button"
-                 style="background-color: #5cb85c;width: 100px;height:50px;line-height:50px;  border-radius:15px;
-             color: #000000;text-align: center;float: left">
-                更新
+    <div style="padding: 40px 10px">
+        <div style="width:75px;margin: 0 auto">{{monthStaticModel.curMonth}}</div>
+        <table class="table table-striped" style="margin-top:5px;width:100%;font-size: 14px;">
+            <thead>
+            <tr>
+                <th style="border-right: 2px solid #ddd;">姓名</th>
+                <th>支出</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="userPay in monthStaticModel.staticUserPays" key="userPay.userId">
+                <td style="border-right: 2px solid #ddd;">
+                    {{userPay.name}}
+                </td>
+                <td>
+                    ￥{{userPay.totalPay}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div style="width:127px;margin: 50px auto">
+            <div style="">总支出:
+                <span style="padding-left: 2em">￥{{monthStaticModel.totalPayPrice}}</span>
             </div>
-            <div @click="deleteBill" type="button"
-                 style="background-color: #761c19;width: 100px;height:50px;line-height:50px;margin-left: 20px;  border-radius:15px;
-             color: #9d9d9d;text-align: center;float: left">
-                删除
+            <div style="margin: 10px auto">平均值:
+                <span style="padding-left: 2em">￥{{monthStaticModel.avgPrice}}</span>
             </div>
         </div>
+        <ul style="width:230px;margin: 0px auto">
+            <li v-for="(calResult,index) in monthStaticModel.calResults" key="index">
+                <span>{{calResult.spendUserName}}</span>
+                <span style="padding-left: 2em;color: #990000">应给</span>
+                <span style="padding-left: 2em">{{calResult.incomeUserName}}</span>
+                <span style="padding-left: 2em">￥{{calResult.price}}</span>
+            </li>
+        </ul>
     </div>
 </div>
 </body>
 <script>
     var vm = new Vue({
-        el: "#oneBill",
+        el: "#monthStatic",
         data: {
             userName: '',
             userPhoto: '',
-            curBillId: 0,  //当前账单ID
-            detail: '',     //消费详情
-            payPrice: null,
-            payDate: ''
+            monthStaticModel: ''
+        },
+        created: function () {
+            //初始化当前用户信息
+            this.initCurUser();
+            //初始化月统计信息
+            this.initMonthStatic();
+        },
+        methods: {
+            toUserInfo: function () {
+                window.location.href = "<%=basePath%>to/user/info";
+            },
+            initMonthStatic: function () {
+                var outer = this;
+                $.ajax({
+                    method: "GET",
+                    url: "<%=basePath%>month/bill/static/info?month=${curMonth}",
+                    success: function (data) {
+                        if (data.success) {
+                            outer.monthStaticModel = data.result;
+                        }
+                    }
+                })
+            },
+            initCurUser: function () {
+                var outer = this;
+                $.ajax({
+                    method: "GET",
+                    url: "<%=basePath%>get/curUser",
+                    success: function (data) {
+                        if (data.success) {
+                            outer.userPhoto = data.result.photo;
+                            outer.userName = data.result.userName;
+                        } else {
+                            //当前用户不存在，跳转登录页面
+                            window.location.href = "/open/user/login";
+                        }
+                    }
+                })
+            }
         }
     });
 </script>

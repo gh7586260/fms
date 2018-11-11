@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="war" name="fms:war">
-    <output-path>$PROJECT_DIR$/../gh-fms/binary/target</output-path>
+    <output-path>$PROJECT_DIR$/binary/target</output-path>
     <root id="archive" name="fms.war">
       <element id="artifact" artifact-name="fms:war exploded" />
     </root>

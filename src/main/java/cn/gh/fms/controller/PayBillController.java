@@ -3,6 +3,7 @@ package cn.gh.fms.controller;
 import cn.gh.fms.BO.PayBill;
 import cn.gh.fms.constant.ErrorCode;
 import cn.gh.fms.model.BillModel;
+import cn.gh.fms.model.MonthStaticModel;
 import cn.gh.fms.result.ListResult;
 import cn.gh.fms.result.Result;
 import cn.gh.fms.result.ResultUtils;
@@ -119,5 +120,14 @@ public class PayBillController extends BaseController {
     public String openMonthStatic(@RequestParam("curMonth") String curMonth, Model model) {
         model.addAttribute("curMonth", curMonth);
         return "bill/monthStatic";
+    }
+
+    //获取用户月账单统计信息
+    @RequestMapping(value = "/month/bill/static/info", method = RequestMethod.GET)
+    @ResponseBody
+    public Result<MonthStaticModel> getMonthBillStaticInfo(@RequestParam("month") String month) throws ParseException {
+        List<PayBill> monthPayBills = this.billService.queryPayBills(month, 0);
+        MonthStaticModel monthStaticModel = this.billConverter.convertMonthStaticModel(month, monthPayBills);
+        return ResultUtils.success(monthStaticModel);
     }
 }

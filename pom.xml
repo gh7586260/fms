@@ -97,7 +97,7 @@
 
     <build>
         <finalName>fms</finalName>
-        <directory>../gh-fms/binary/target</directory>
+        <directory>../fms/binary/target</directory>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

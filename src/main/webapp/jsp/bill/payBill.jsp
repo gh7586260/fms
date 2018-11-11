@@ -55,7 +55,8 @@
                     <td>{{payBill.detail}}</td>
                     <td>{{payBill.payPrice}}</td>
                     <td>{{payBill.payTime}}</td>
-                    <td style="color: #337ab7;" @click="toOneBill(payBill.billId)">编辑</td>
+                    <td v-if="canEdit(payBill.userId)" style="color: #337ab7;" @click="toOneBill(payBill.billId)">编辑</td>
+                    <td v-if="!canEdit(payBill.userId)" style="color: #cccccc;">编辑</td>
                 </tr>
             </template>
             </tbody>
@@ -67,11 +68,13 @@
     var vm = new Vue({
         el: "#userTable",
         data: {
+            curUserId: 0,
             userName: '',
             userPhoto: '',
             payBills: null,
             allUsers: null,
-            curMonth: '2015-09'
+            curMonth: '', //当前查看月份
+            nowMonth: ''  //当前时间月份
         },
         watch: {
             curMonth: function () {
@@ -90,9 +93,14 @@
             this.queryBills();
         },
         methods: {
+            canEdit:function (billUserId) {
+                //是当前用户的账单且现在就是所查看的月份
+                return this.curUserId == billUserId && this.curMonth == this.nowMonth;
+            },
             toUserInfo: function () {
                 window.location.href = "<%=basePath%>to/user/info";
             },
+            //编辑或添加
             toOneBill: function (curBillId) {
                 window.location.href = "<%=basePath%>open/one/bill?curBillId=" + curBillId;
             },
@@ -104,7 +112,8 @@
                 var year = date.getFullYear();
                 var month = date.getMonth() + 1;
                 month = (month < 10 ? "0" + month : month);
-                this.curMonth = year + '-' + month;
+                this.nowMonth = year + '-' + month;
+                this.curMonth = this.nowMonth;
             },
             queryBills: function () {
                 if (this.curMonth == null || this.curMonth.trim() == '') {
@@ -129,6 +138,7 @@
                     url: "<%=basePath%>get/curUser",
                     success: function (data) {
                         if (data.success) {
+                            outer.curUserId = data.result.userId;
                             outer.userPhoto = data.result.photo;
                             outer.userName = data.result.userName;
                         } else {

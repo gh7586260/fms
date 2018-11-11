@@ -3,8 +3,8 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile name="Annotation profile for fms" enabled="true">
-        <sourceOutputDir name="../gh-fms/binary/target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../gh-fms/binary/target/generated-test-sources/test-annotations" />
+        <sourceOutputDir name="binary/target/generated-sources/annotations" />
+        <sourceTestOutputDir name="binary/target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="fms" />
       </profile>

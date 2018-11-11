@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 @MapperScan(value = "cn.gh.fms.mapper")
 //开启事物管理
 @EnableTransactionManagement
-@PropertySource(value = {"classpath:propertity/gh-fms.properties"},ignoreResourceNotFound = true,encoding = "utf-8")
+@PropertySource(value = {"classpath:propertity/fms.properties"},ignoreResourceNotFound = true,encoding = "utf-8")
 public class DataSourceConfiguration {
 
     @Primary
