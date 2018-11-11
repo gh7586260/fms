@@ -30,14 +30,14 @@
         <span style="line-height: 50px;padding-left: 10px">{{userName}}</span>
     </div>
     <div style="padding: 40px 10px">
-        <input type="month" v-model="curMonth" style="height: 25px"/>
-        <select style="width: 100px;height: 25px" @change="queryBills" id="userSelect">
+        <input type="month" v-model="curMonth" style="height: 25px;width: 120px"/>
+        <select style="width: 80px;height: 25px" @change="queryBills" id="userSelect">
             <option value="0">全部</option>
             <option v-for="selectUser in allUsers" :value="selectUser.userId">{{selectUser.userName}}</option>
         </select>
-
+        <a @click="toMonthStatic" style="padding-left: 15px">统计</a>
         <div @click="toOneBill(0)" type="button"
-             style="background-color: #5cb85c;width: 80px;height:25px;line-height:25px;  border-radius:15px; color: #000000;float: right;text-align: center;margin-right: 10px">
+             style="background-color: #5cb85c;width: 70px;height:25px;line-height:25px;  border-radius:15px; color: #000000;float: right;text-align: center;margin-right: 10px">
             添加
         </div>
         <table class="table table-striped" style="margin-top:5px;width:100%;border: 1px solid #ddd;font-size: 14px;">
@@ -95,6 +95,9 @@
             },
             toOneBill: function (curBillId) {
                 window.location.href = "<%=basePath%>open/one/bill?curBillId=" + curBillId;
+            },
+            toMonthStatic: function () {
+                window.location.href = "<%=basePath%>open/month/static?curMonth=" + this.curMonth;
             },
             initCurTime: function () {
                 var date = new Date;

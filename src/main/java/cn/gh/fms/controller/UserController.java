@@ -6,8 +6,6 @@ import cn.gh.fms.result.ListResult;
 import cn.gh.fms.result.Result;
 import cn.gh.fms.result.ResultUtils;
 import cn.gh.fms.server.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class UserController extends BaseController {
-
-    private final static Logger LOG = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
@@ -82,7 +78,6 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/user/login/excute", method = RequestMethod.GET)
     public String doLogin(@RequestParam("userName") String userName, @RequestParam("password") String password, Model model) {
-        LOG.info("-----------------user do login:userName:{},password:{}", userName, password);
         Result<User> userResult = this.userService.getByUserNameAndPwd(userName, password);
         if (!userResult.isSuccess()) {
             model.addAttribute("errorMsg", userResult.getErrorMsg());
@@ -108,7 +103,7 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/user/modify/password/excute", method = RequestMethod.PUT)
     @ResponseBody
     public Result<Void> modifyPwd(@RequestParam("newPassword") String newPassword) {
-        if (StringUtils.isEmpty(newPassword)) {
+        if(StringUtils.isEmpty(newPassword)){
             return ResultUtils.error(ErrorCode.PARAM_ERROR);
         }
         Long curUserId = super.getLoginUser();

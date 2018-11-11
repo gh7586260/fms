@@ -74,6 +74,17 @@ public class PayBillController extends BaseController {
         return "redirect:/bill/open";
     }
 
+    //删除账单
+    @RequestMapping(value = "/delete/bill", method = RequestMethod.GET)
+    public String deleteBill(@RequestParam("billId") long billId, Model model) {
+        Result<Void> deleteResult = this.billService.delete(billId);
+        if (!deleteResult.isSuccess()) {
+            model.addAttribute("errorMsg", deleteResult.getErrorMsg());
+            return "systemError";
+        }
+        return "redirect:/bill/open";
+    }
+
     /**
      * 获取单个账单详情
      *
@@ -101,5 +112,12 @@ public class PayBillController extends BaseController {
         List<BillModel> billModels = this.billConverter.convertBillModels(payBills);
         listResult.setList(billModels);
         return listResult;
+    }
+
+    //打开月资金统计页面
+    @RequestMapping(value = "/open/month/static", method = RequestMethod.GET)
+    public String openMonthStatic(@RequestParam("curMonth") String curMonth, Model model) {
+        model.addAttribute("curMonth", curMonth);
+        return "bill/monthStatic";
     }
 }

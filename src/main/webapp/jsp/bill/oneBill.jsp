@@ -35,10 +35,26 @@
             <div style="width: 100px;float: left;line-height: 30px">日期</div>
             <input type="date" v-model="payDate" style="height: 25px"/>
         </div>
-        <div @click="addBill" type="button"
+        <div v-if="curBillId==0" @click="addBill" type="button"
              style="background-color: #5cb85c;width: 150px;height:50px;line-height:50px;  border-radius:15px;
              color: #000000;text-align: center;margin: 80px auto">
-            {{curBillId==0?'添加':'更新'}}
+            添加
+        </div>
+        <div v-if="curBillId!=0" style="margin-top: 60px">
+            <div style="width: 50%;float: left">
+                <div @click="editBill" type="button"
+                     style="margin:0 auto;background-color: #5cb85c;width: 100px;height:50px;line-height:50px;  border-radius:15px;
+             color: #000000;text-align: center;">
+                    更新
+                </div>
+            </div>
+            <div style="width: 50%;float: left">
+                <div @click="deleteBill" type="button"
+                     style="margin:0 auto;background-color: #761c19;width: 100px;height:50px;line-height:50px; border-radius:15px;
+             color: #9d9d9d;text-align: center;">
+                    删除
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -83,6 +99,9 @@
             },
             editBill: function () {
                 window.location.href = "<%=basePath%>edit/bill?billId=" + this.curBillId + "&detail=" + this.detail + "&payPrice=" + this.payPrice + "&payTime=" + this.payDate;
+            },
+            deleteBill: function () {
+                window.location.href = "<%=basePath%>delete/bill?billId=" + this.curBillId;
             },
             toUserInfo: function () {
                 window.location.href = "<%=basePath%>to/user/info";

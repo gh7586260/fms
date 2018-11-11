@@ -46,6 +46,12 @@ public class BillServiceImpl implements BillService {
     }
 
     @Override
+    public Result<Void> delete(long billId) {
+        this.billMapper.delete(billId);
+        return ResultUtils.success();
+    }
+
+    @Override
     public Result<PayBill> getById(long billId) {
         PayBillDO payBillDO = this.billMapper.getById(billId);
         return ResultUtils.success(PayBillTrans.toBO(payBillDO));

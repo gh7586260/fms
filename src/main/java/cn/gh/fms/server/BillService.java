@@ -15,6 +15,9 @@ public interface BillService {
     //编辑
     Result<Void> editBill(long billId, String detail, BigDecimal payPrice, Date payDate);
 
+    //删除
+    Result<Void> delete(long billId);
+
     //根据ID获取账单信息
     Result<PayBill> getById(long billId);
 
