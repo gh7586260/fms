@@ -26,7 +26,12 @@ public class UserController extends BaseController {
     public String toLogin() {
         Long curUserId = super.getLoginUser();
         if (curUserId != null) {
-            return "user/userInfo";
+            Result<User> userResult = this.userService.getById(curUserId);
+            if(userResult.isSuccess()){
+                return "redirect:/to/user/info";
+            }
+            //cookie中的用户不存在，清楚当前cookie，重新登录
+            super.updateUser(null);
         }
         return "user/login";
     }
@@ -48,7 +53,7 @@ public class UserController extends BaseController {
         return this.userService.getById(curUserId);
     }
 
-    //获得当前用户信息
+    //查询所有的用户列表
     @RequestMapping(value = "/query/all/users", method = RequestMethod.GET)
     @ResponseBody
     public ListResult<User> queryAllUsers() {
@@ -103,7 +108,7 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/user/modify/password/excute", method = RequestMethod.PUT)
     @ResponseBody
     public Result<Void> modifyPwd(@RequestParam("newPassword") String newPassword) {
-        if(StringUtils.isEmpty(newPassword)){
+        if (StringUtils.isEmpty(newPassword)) {
             return ResultUtils.error(ErrorCode.PARAM_ERROR);
         }
         Long curUserId = super.getLoginUser();

@@ -57,7 +57,7 @@
             </tr>
             </tbody>
         </table>
-        <div style="width:127px;margin: 50px auto">
+        <div style="width:150px;margin: 50px auto">
             <div style="">总支出:
                 <span style="padding-left: 2em">￥{{monthStaticModel.totalPayPrice}}</span>
             </div>
@@ -65,7 +65,7 @@
                 <span style="padding-left: 2em">￥{{monthStaticModel.avgPrice}}</span>
             </div>
         </div>
-        <ul style="width:230px;margin: 0px auto">
+        <ul style="width:250px;margin: 0px auto">
             <li v-for="(calResult,index) in monthStaticModel.calResults" key="index">
                 <span>{{calResult.spendUserName}}</span>
                 <span style="padding-left: 2em;color: #990000">应给</span>

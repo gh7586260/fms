@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+    <resourceExtensions />
     <annotationProcessing>
-      <profile name="Annotation profile for fms" enabled="true">
+      <profile default="true" name="Default" enabled="false">
+        <processorPath useClasspath="true" />
+      </profile>
+      <profile default="false" name="Annotation profile for fms" enabled="true">
         <sourceOutputDir name="binary/target/generated-sources/annotations" />
-        <sourceTestOutputDir name="binary/target/generated-test-sources/test-annotations" />
+        <sourceTestOutputDir name="binary\target\generated-test-sources\test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
         <module name="fms" />
       </profile>
     </annotationProcessing>
