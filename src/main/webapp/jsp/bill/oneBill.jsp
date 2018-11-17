@@ -33,7 +33,7 @@
         </div>
         <div style="margin-top: 30px">
             <div style="width: 100px;float: left;line-height: 30px">日期</div>
-            <input type="date" v-model="payDate" style="height: 25px"/>
+            <input type="date" v-model="payDate" style="height: 25px" :min="minDate" :max="maxDate"/>
         </div>
         <div v-if="curBillId==0" @click="addBill" type="button"
              style="background-color: #5cb85c;width: 150px;height:50px;line-height:50px;  border-radius:15px;
@@ -68,7 +68,9 @@
             curBillId: 0,  //当前账单ID
             detail: '',     //消费详情
             payPrice: null,
-            payDate: ''
+            payDate: '',
+            maxDate: '',
+            minDate: ''
         },
         watch: {
             detail: function () {
@@ -81,12 +83,23 @@
             //初始化当前用户信息
             this.initCurUser();
             this.curBillId =${curBillId == null ?0:curBillId};
-            //初始化当前账单信息
+            //当前年月日
+            var date = new Date;
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            month = (month < 10 ? "0" + month : month);
+            day = (day < 10 ? "0" + day : day);
+            //设置最大值不能超过当前日期
+            this.maxDate = year + '-' + month + '-' + day;
+            //设置最小值为当前月份的1号
+            this.minDate = year + '-' + month + '-01';
             if (this.curBillId != null && this.curBillId != 0) {
+                //初始化当前账单信息
                 this.initCurBill();
             } else {
                 //初始化当前日期
-                this.initCurTime();
+                this.payDate = this.maxDate;
             }
         },
         methods: {
@@ -98,6 +111,7 @@
                 window.location.href = "<%=basePath%>add/bill?detail=" + this.detail + "&payPrice=" + this.payPrice + "&payTime=" + this.payDate;
             },
             editBill: function () {
+                this.payDate
                 window.location.href = "<%=basePath%>edit/bill?billId=" + this.curBillId + "&detail=" + this.detail + "&payPrice=" + this.payPrice + "&payTime=" + this.payDate;
             },
             deleteBill: function () {
@@ -119,15 +133,6 @@
                         }
                     }
                 })
-            },
-            initCurTime: function () {
-                var date = new Date;
-                var year = date.getFullYear();
-                var month = date.getMonth() + 1;
-                var day = date.getDate()
-                month = (month < 10 ? "0" + month : month);
-                day = (day < 10 ? "0" + day : day);
-                this.payDate = year + '-' + month + '-' + day;
             },
             initCurUser: function () {
                 var outer = this;
