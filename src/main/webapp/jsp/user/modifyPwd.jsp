@@ -17,10 +17,13 @@
 </head>
 <body>
 
-<div style="width: 100%; padding: 100px 120px;" id="modifyPwd">
-    <div style="margin: 30px auto;width: 172px">
+<div id="modifyPwd">
+    <img src="http://oss.pg.yibaotong.top/system/pg_oms_back.jpg"
+         style="width:100%;height:100%;position: absolute;left: 0;top: 0;z-index: -1;">
+    <div style="width: 200px; margin: 100px auto">
         <span style="">当前用户：{{userName}}</span>
-        <input v-model="newPassword" placeholder="新密码" style="display: block;margin-top: 30px;height: 30px;"/>
+        <input v-model="newPassword" placeholder="新密码"
+               style="display: block;margin-top: 30px;width: 100%;height: 30px;padding-left: 5px"/>
         <span style="color: red;margin: 0 auto;text-align: center;padding-left:50px">{{tipMsg}}</span>
         <input @click="doModify" type="button" value="确定" class="js_login"
                style="display:block;width: 80px;height: 40px;margin: 10px auto;"/>

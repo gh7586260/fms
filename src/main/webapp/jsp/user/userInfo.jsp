@@ -17,15 +17,21 @@
 </head>
 <body>
 
-<div style="width: 100%; padding: 100px 120px;" id="userInfo">
-    <div style="width: 150px;margin: 0 auto;">
-        <img :src="userPhoto" style="max-width: 100%;height: 150px;"/>
+<div id="userInfo">
+    <img src="http://oss.pg.yibaotong.top/system/pg_oms_back.jpg"
+         style="width:100%;height:100%;position: absolute;left: 0;top: 0;z-index: -1;">
+    <div style="width: 200px; margin: 100px auto">
+        <div style="width: 150px;margin: 0 auto;">
+            <img :src="userPhoto" style="max-width: 100%;height: 150px;"/>
+        </div>
+        <span style="display:block;margin: 20px auto;text-align: center;">{{userName}}</span>
+        <a @click="toPayBill" style="text-align: center;display: block;color: green;">查看流水</a>
+        <div style="display:block;width: 70%;margin: 50px auto">
+            <input @click="doLoginOut" type="button" value="登出"
+                   style="display:block;height: 40px;width:100%;margin: 0 auto"/>
+            <a @click="toModifyPwd" style="display: block;margin-top:20px;float:right;color: coral;">修改密码</a>
+        </div>
     </div>
-    <span style="display:block;margin: 30px auto;text-align: center;">{{userName}}</span>
-    <a @click="toPayBill" style="text-align: center;display: block;">查看流水</a>
-    <a @click="toModifyPwd" style="text-align: center;display: block;margin-top: 50px">修改密码</a>
-    <input @click="doLoginOut" type="button" value="登出"
-           style="display:block;width: 100px;height: 40px;margin: 10px auto;"/>
 </div>
 </body>
 

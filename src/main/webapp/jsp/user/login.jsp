@@ -17,13 +17,17 @@
 </head>
 <body>
 
-<div style="width: 100%; padding: 100px 120px;" id="userLogin">
-    <input v-model="userName" placeholder="用户名"
-           style="display: block;margin: 30px auto;height: 30px;"/>
-    <input v-model="password" placeholder="密码" style="display: block;margin: 30px auto;height: 30px;"/>
-    <span style="color: red;margin: 0 auto;text-align: center;padding-left:50px">{{errorMsg}}</span>
-    <input @click="doLogin" type="button" value="登录"
-           style="display:block;width: 80px;height: 40px;margin: 10px auto;"></input>
+<div id="userLogin">
+    <img src="http://oss.pg.yibaotong.top/system/pg_oms_back.jpg"
+         style="width:100%;height:100%;position: absolute;left: 0;top: 0;z-index: -1;">
+    <div style="width: 200px; margin: 100px auto">
+        <input v-model="userName" placeholder="用户名"
+               style="display: block;margin: 30px auto;height: 30px;padding-left: 5px"/>
+        <input v-model="password" placeholder="密码" style="display: block;margin: 30px auto;height: 30px;padding-left: 5px"/>
+        <span style="color: red;margin: 0 auto;text-align: center;padding-left:50px">{{errorMsg}}</span>
+        <input @click="doLogin" type="button" value="登录"
+               style="display:block;width: 80px;height: 40px;margin: 10px auto;"></input>
+    </div>
 </div>
 </body>
 
