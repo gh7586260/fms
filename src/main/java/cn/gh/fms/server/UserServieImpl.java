@@ -39,9 +39,18 @@ public class UserServieImpl implements UserService {
 
     @Override
     public Result<Void> doModifyPhoto(long userId, MultipartFile multipartFile) {
-        File targetFile = new File(localFileDir.concat("/user_" + userId).concat(".jpg"));
-        if (targetFile.exists()) {
-            targetFile.delete();
+        File fileDir = new File(localFileDir);
+        File oldFile = null;
+        File targetFile = new File(localFileDir.concat("/user" + userId + "_").concat(System.currentTimeMillis() + ".jpg"));
+        String[] names = fileDir.list();
+        for (String fileName : names) {
+            if (fileName.startsWith("user" + userId + "_")) {
+                oldFile = new File(fileDir.getAbsolutePath().concat("/") + fileName);
+                break;
+            }
+        }
+        if (oldFile != null && oldFile.exists()) {
+            oldFile.delete();
         }
         try {
             this.saveLocalImage(multipartFile.getInputStream(), targetFile);
