@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%
+    String filePath = (String) session.getAttribute("filePath");
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/";
 %>
 
@@ -9,12 +10,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>月资金统计</title>
-    <script src="<%=basePath%>js/html5.js" type="text/javascript"></script>
-    <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="<%=basePath%>css/base.css" rel="stylesheet" type="text/css">
-    <script src="<%=basePath%>js/jquery-1.10.2.min.js"></script>
-    <script src="<%=basePath%>js/bootstrap.min.js"></script>
-    <script src="<%=basePath%>js/vue.min.js"></script>
+    <script src="<%=filePath%>js/html5.js" type="text/javascript"></script>
+    <link href="<%=filePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="<%=filePath%>css/base.css" rel="stylesheet" type="text/css">
+    <script src="<%=filePath%>js/jquery-1.10.2.min.js"></script>
+    <script src="<%=filePath%>js/bootstrap.min.js"></script>
+    <script src="<%=filePath%>js/vue.min.js"></script>
     <style type="text/css">
         .table > thead > tr > th {
             text-align: center;

@@ -1,19 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <%
-    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + "/";
+    String filePath = (String) session.getAttribute("filePath");
 %>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>错误页面</title>
-    <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="<%=basePath%>css/base.css" rel="stylesheet" type="text/css">
-    <script src="<%=basePath%>js/html5.js" type="text/javascript"></script>
-    <script src="<%=basePath%>js/jquery-1.10.2.min.js" type="text/javascript"></script>
-    <script src="<%=basePath%>js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="<%=basePath%>js/vue.min.js" type="text/javascript"></script>
+    <link href="<%=filePath%>css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="<%=filePath%>css/base.css" rel="stylesheet" type="text/css">
+    <script src="<%=filePath%>js/html5.js" type="text/javascript"></script>
+    <script src="<%=filePath%>js/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="<%=filePath%>js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="<%=filePath%>js/vue.min.js" type="text/javascript"></script>
 </head>
 <body>
 
