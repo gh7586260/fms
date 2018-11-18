@@ -17,8 +17,8 @@
 </head>
 <body>
 
-<div style="width: 100%; padding: 100px 120px;">
-    <span class="js_userName" placeholder="用户名" style="display: block;margin: 30px auto;height: 30px;">
+<div style="width: 100%;margin-top: 100px ">
+    <span class="js_userName" placeholder="用户名" style="display: block;padding:0 10px;text-align: center;color:crimson;font-size: large">
         ${errorMsg}
     </span>
 </div>
