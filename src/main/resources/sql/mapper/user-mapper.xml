@@ -23,6 +23,10 @@
     </select>
 
     <update id="updatePwd">
-        update user set password = #{newPassword} where id=#{userId}
+        update user set gmt_last_modified = now(),password = #{newPassword} where id=#{userId}
+    </update>
+
+    <update id="updatPhoto">
+        update user set gmt_last_modified = now(),photo = #{photo} where id=#{userId}
     </update>
 </mapper>

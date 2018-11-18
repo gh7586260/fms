@@ -41,7 +41,8 @@ public class UserServieImpl implements UserService {
     public Result<Void> doModifyPhoto(long userId, MultipartFile multipartFile) {
         File fileDir = new File(localFileDir);
         File oldFile = null;
-        File targetFile = new File(localFileDir.concat("/user" + userId + "_").concat(System.currentTimeMillis() + ".jpg"));
+        String newPhotoUrl = "file/user" + userId + "_".concat(System.currentTimeMillis() + ".jpg");
+        File targetFile = new File(localFileDir.concat(newPhotoUrl));
         String[] names = fileDir.list();
         for (String fileName : names) {
             if (fileName.startsWith("user" + userId + "_")) {
@@ -59,6 +60,7 @@ public class UserServieImpl implements UserService {
             LOG.error("Get file data failed", e);
             return ResultUtils.error(ErrorCode.SYSTEM_ERROR);
         }
+        this.userMapper.updatPhoto(userId, newPhotoUrl);
         return ResultUtils.success();
     }
 

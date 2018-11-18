@@ -20,4 +20,6 @@ public interface UserMapper {
     UserDO getByUserNameAndPwd(@Param("userName") String userName, @Param("password") String password);
 
     boolean updatePwd(@Param("userId") long userId, @Param("newPassword") String newPassword);
+
+    boolean updatPhoto(@Param("userId") long userId, @Param("photo") String photo);
 }
