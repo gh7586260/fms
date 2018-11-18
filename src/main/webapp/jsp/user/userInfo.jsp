@@ -36,7 +36,7 @@
         <form id="uploadForm" action="/do/user/modify/photo" method="POST" enctype="multipart/form-data">
             <div style="width: 150px;margin: 0 auto;">
                 <input name="photoFile" class="photoInput" @change="modifyPhoto" type="file" accept="image/*">
-                <img :src="userPhoto" style="max-width: 100%;height: 150px;"/>
+                <img :src="userPhoto" style="max-width: 100%;margin:0 auto;height: 150px;display: block"/>
             </div>
         </form>
         <span style="display:block;margin: 20px auto;text-align: center;">{{userName}}</span>
