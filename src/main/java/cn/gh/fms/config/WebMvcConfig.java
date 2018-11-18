@@ -1,11 +1,14 @@
 package cn.gh.fms.config;
 
 import cn.gh.fms.interceptor.InitInterceptor;
+import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import javax.servlet.MultipartConfigElement;
 
 /**
  * @author 郭宏
@@ -34,4 +37,11 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         registration.addPathPatterns("/user/login/out");
     }
 
+    @Bean
+    public MultipartConfigElement multipartConfigElement() {
+        MultipartConfigFactory factory = new MultipartConfigFactory();
+        factory.setMaxRequestSize(10 * 1024L * 1024L);//单次请求的文件的总数不能大于10Mb
+        factory.setMaxFileSize(10 * 1024L * 1024L);//每个文件的配置最大为10Mb
+        return factory.createMultipartConfig();
+    }
 }
