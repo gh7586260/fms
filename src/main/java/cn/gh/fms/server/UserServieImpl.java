@@ -39,7 +39,7 @@ public class UserServieImpl implements UserService {
 
     @Override
     public Result<Void> doModifyPhoto(long userId, MultipartFile multipartFile) {
-        File fileDir = new File(localFileDir);
+        File fileDir = new File(localFileDir.concat("file"));
         File oldFile = null;
         String newPhotoUrl = "file/user" + userId + "_".concat(System.currentTimeMillis() + ".jpg");
         File targetFile = new File(localFileDir.concat(newPhotoUrl));
