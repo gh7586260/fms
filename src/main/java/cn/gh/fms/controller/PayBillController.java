@@ -53,6 +53,10 @@ public class PayBillController extends BaseController {
             model.addAttribute("errorMsg", ErrorCode.PARAM_ERROR.getErrorMsg());
             return "systemError";
         }
+        if (payPrice.doubleValue() > 1000) {
+            model.addAttribute("errorMsg", ErrorCode.VALUE_ILLEGAL.getErrorMsg());
+            return "systemError";
+        }
         Date payDate = new SimpleDateFormat("yyyy-MM-dd").parse(payTime);
         Result<Void> addBillResult = this.billService.addBill(super.getLoginUser(), detail, payPrice, payDate);
         if (!addBillResult.isSuccess()) {
@@ -66,6 +70,10 @@ public class PayBillController extends BaseController {
     @RequestMapping(value = "/edit/bill", method = RequestMethod.GET)
     public String addBill(@RequestParam("billId") long billId, @RequestParam("detail") String detail, @RequestParam("payPrice") BigDecimal payPrice,
                           @RequestParam("payTime") String payTime, Model model) throws ParseException {
+        if (payPrice.doubleValue() > 1000) {
+            model.addAttribute("errorMsg", ErrorCode.VALUE_ILLEGAL.getErrorMsg());
+            return "systemError";
+        }
         Date payDate = new SimpleDateFormat("yyyy-MM-dd").parse(payTime);
         Result<Void> editResult = this.billService.editBill(billId, detail, payPrice, payDate);
         if (!editResult.isSuccess()) {

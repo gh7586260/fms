@@ -2,6 +2,7 @@ package cn.gh.fms.server;
 
 import cn.gh.fms.BO.User;
 import cn.gh.fms.result.Result;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -14,6 +15,15 @@ public interface UserService {
      * @return
      */
     Result<User> getById(long userId);
+
+    /**
+     * 执行用户修改头像
+     *
+     * @param userId
+     * @param multipartFile
+     * @return
+     */
+    Result<Void> doModifyPhoto(long userId, MultipartFile multipartFile);
 
     /**
      * 查询所有用户

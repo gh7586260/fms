@@ -19,7 +19,7 @@
 <body>
 
 <div id="userLogin">
-    <img src="http://oss.pg.yibaotong.top/system/pg_oms_back.jpg"
+    <img src="<%=filePath%>file/fms_back.jpg"
          style="width:100%;height:100%;position: absolute;left: 0;top: 0;z-index: -1;">
     <div style="width: 200px; margin: 100px auto">
         <input v-model="userName" placeholder="用户名"

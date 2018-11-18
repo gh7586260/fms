@@ -15,16 +15,30 @@
     <script src="<%=filePath%>js/jquery-1.10.2.min.js" type="text/javascript"></script>
     <script src="<%=filePath%>js/bootstrap.min.js" type="text/javascript"></script>
     <script src="<%=filePath%>js/vue.min.js" type="text/javascript"></script>
+
+    <style>
+        .photoInput {
+            width: 100%;
+            height: 150px;
+            line-height: 150px;
+            opacity: 0;
+            position: absolute;
+            top: 100px;
+            left: 0;
+        }
+    </style>
 </head>
 <body>
-
 <div id="userInfo">
-    <img src="http://oss.pg.yibaotong.top/system/pg_oms_back.jpg"
+    <img src="<%=filePath%>file/fms_back.jpg"
          style="width:100%;height:100%;position: absolute;left: 0;top: 0;z-index: -1;">
     <div style="width: 200px; margin: 100px auto">
-        <div style="width: 150px;margin: 0 auto;">
-            <img :src="userPhoto" style="max-width: 100%;height: 150px;"/>
-        </div>
+        <form id="uploadForm" action="/do/user/modify/photo" method="POST" enctype="multipart/form-data">
+            <div style="width: 150px;margin: 0 auto;">
+                <input name="photoFile" class="photoInput" @change="modifyPhoto" type="file" accept="image/*">
+                <img :src="userPhoto" style="max-width: 100%;height: 150px;"/>
+            </div>
+        </form>
         <span style="display:block;margin: 20px auto;text-align: center;">{{userName}}</span>
         <a @click="toPayBill" style="text-align: center;display: block;color: green;">查看流水</a>
         <div style="display:block;width: 70%;margin: 50px auto">
@@ -62,6 +76,10 @@
             })
         },
         methods: {
+            //用户修改头像
+            modifyPhoto: function () {
+                $('#uploadForm').submit();
+            },
             //用户登出
             doLoginOut: function () {
                 window.location.href = "/user/login/out";
