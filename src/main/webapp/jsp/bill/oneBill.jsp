@@ -19,6 +19,8 @@
 </head>
 <body>
 <div id="oneBill">
+    <img src="<%=filePath%>file/fms_back.jpg"
+         style="width:100%;height:100%;position: absolute;left: 0;top: 0;z-index: -1;">
     <div @click="toUserInfo" style="width: 150px;margin: 10px 10px">
         <img style="width: 50px;height: 50px;float: left;" :src="userPhoto">
         <span style="line-height: 50px;padding-left: 10px">{{userName}}</span>
@@ -26,11 +28,11 @@
     <div style="padding: 50px 30px">
         <div style="margin-top: 30px">
             <div style="width: 100px;float: left;line-height: 30px">使用事项</div>
-            <input type="text" v-model="detail" style="display: block;width: 200px;height: 30px;"/>
+            <input type="text" v-model="detail" placeholder="不能超过11个字" style="display: block;width: 200px;height: 30px;padding-left: 5px;"/>
         </div>
         <div style="margin-top: 30px">
             <div style="width: 100px;float: left;line-height: 30px">金额</div>
-            <input type="number" v-model="payPrice" style="display: block;width: 50px;height: 30px;"/>
+            <input type="number" v-model="payPrice" placeholder="1000以内" style="display: block;width: 80px;height: 30px;padding-left: 5px;"/>
         </div>
         <div style="margin-top: 30px">
             <div style="width: 100px;float: left;line-height: 30px">日期</div>

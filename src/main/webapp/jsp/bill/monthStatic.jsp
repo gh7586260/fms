@@ -34,6 +34,8 @@
 </head>
 <body>
 <div id="monthStatic">
+    <img src="<%=filePath%>file/fms_back.jpg"
+         style="width:100%;height:100%;position: absolute;left: 0;top: 0;z-index: -1;">
     <div @click="toUserInfo" style="width: 150px;margin: 10px 10px">
         <img style="width: 50px;height: 50px;float: left;" :src="userPhoto">
         <span style="line-height: 50px;padding-left: 10px">{{userName}}</span>
