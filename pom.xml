@@ -70,6 +70,11 @@
             <artifactId>pagehelper</artifactId>
             <version>${github.pagehelper.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>3.8.2</version>
+        </dependency>
         <!--j2ee相关包 servlet、jsp、jstl-->
         <dependency>
             <groupId>javax.servlet</groupId>
