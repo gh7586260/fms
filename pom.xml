@@ -44,7 +44,7 @@
                     <artifactId>spring-boot-starter-tomcat</artifactId>
                 </exclusion>
             </exclusions>
-            <version>1.4.5.RELEASE</version>
+            <version>2.5.12</version>
         </dependency>
         <!--sql-->
         <dependency>
